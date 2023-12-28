@@ -17,6 +17,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <link rel="stylesheet" type="text/css"
 	href="/css/weather_history/style.css">
@@ -51,7 +54,7 @@
 			<%-- 날씨 추가 --%>
 			<section class="col-10 mt-3 ml-5">
 				<h3>날씨 입력</h3>
-				<form>
+				<form method="post" action="/weather-history/add-weather">
 					<div class="d-flex justify-content-between mt-5">
 						<div class="d-flex align-items-center">
 							<div class="input-label">날짜</div>
@@ -128,5 +131,14 @@
 			</div>
 		</footer>
 	</div>
+<script>
+	$(document).ready(function() {
+		//날짜 선택
+		$("#date").datepicker( {
+			dateFormat: "yy-mm-dd"
+		});
+	});
+</script>
+	
 </body>
 </html>

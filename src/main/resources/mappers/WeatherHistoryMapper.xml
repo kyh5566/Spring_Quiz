@@ -5,11 +5,19 @@
 <mapper namespace="com.quiz.weather_history.mapper.WeatherHistoryMapper">
  	<select id="selectweatherhistory" resultType="com.quiz.weather_history.domain.WeatherHistory">
  		SELECT
- 		*
+ 			`id`
+			,`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
  		FROM
  			`weather_history`
  	</select>
- 	<insert id="insertweatherhistory" >
+ 	<insert id="insertweatherhistory" parameterType="map">
  		INSERT INTO
  		(
  		`date`
