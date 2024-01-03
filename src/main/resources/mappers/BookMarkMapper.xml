@@ -6,19 +6,46 @@
  <insert id="insertbook" parameterType="com.quiz.lesson06.domain.BookMark">
  	INSERT INTO `bookmark`
  	(
- 		`id`
-		,`name`
+		`name`
 		,`url`
 		,`createdAt`
 		,`updatedAt`
  	)
  	VALUES
  	(
- 		#{id}
- 		,#{title}
+ 		#{title}
  		,#{url}
  		,NOW()
  		,NOW()
  	)
  	</insert>
+ 	<select id="selectBookMark" resultType="com.quiz.lesson06.domain.BookMark">
+ 		SELECT
+			`id`
+			, `name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`bookmark`
+ 	</select>
+ 	<select id="selectBookMarkList" parameterType="String" resultType="com.quiz.lesson06.domain.BookMark">
+ 		SELECT
+			`id`
+			, `name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`bookmark`
+		WHERE
+			`url` = #{url}
+ 	</select>
+ 	<delete id="deleteBookMarkById" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`bookmark`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  </mapper>
