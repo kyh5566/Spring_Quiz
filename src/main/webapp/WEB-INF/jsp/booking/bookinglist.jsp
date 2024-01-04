@@ -24,8 +24,8 @@
                 <ul class="nav nav-fill">
                     <li class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">펜션소개</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">객실보기</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">예약하기</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white font-weight-bold">예약목록</a></li>
+                    <li class="nav-item"><a href="/booking/make-booking-view" class="nav-link text-white font-weight-bold">예약하기</a></li>
+	            	<li class="nav-item"><a href="/booking/booking-list-view" class="nav-link text-white font-weight-bold">예약목록</a></li>
                 </ul>
             </nav>
             <div class="d-flex fustify-content-center align-items-center">
@@ -51,11 +51,54 @@
             			<td>${booking.day}</td>
             			<td>${booking.headcount}</td>
             			<td>${booking.phoneNumber}</td>
-            			<td>${booking.state}</td>
-            			<td></td>
+            			<td>
+            				<c:choose>
+            					<c:when test="${booking.state == '대기중'}">
+            						<span class="text-info">${booking.state}</span>
+            					</c:when>
+            					<c:when test="${booking.state == '확정'}">
+            						<span class="text-success">${booking.state}</span>
+            					</c:when>
+            					<c:when test="${booking.state == '취소'}">
+            						<span class="text-danger">${booking.state}</span>
+            					</c:when>
+            				</c:choose>
+            			</td>
+            			<td>
+            				<button class="del-btn btn btn-danger" type="button" data-booking-id="${booking.id}">삭제</button>
+            			</td>
             		</tr>
             		</c:forEach>
             	</tbody>
             </table>
 </body>
+<script>
+	$(document).ready(function() {
+		$(".del-btn").on("click",function() {
+			//alert("삭제 클릭");
+			let id = $(this).data('booking-id');
+			//alert(id);
+			
+			$.ajax({
+				type:"delete"
+				,url:"/booking/delete-booking"
+				,data:{"id":id}
+				
+			,success:function(data) {
+				// {"code":200, "result":"성공"}
+				if (data.result == "성공") {
+					location.reload(true);
+				} else {
+					// {"code":500, "error_message":"삭제 실패"}
+					alert(error_message);
+				}
+			}
+			,error:function(request, status, error) {
+				alert("삭제하는데 실패하였습니다. error");
+			}
+			
+			});
+		});
+	});
+</script>
 </html>
