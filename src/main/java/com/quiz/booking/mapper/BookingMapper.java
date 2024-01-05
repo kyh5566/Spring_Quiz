@@ -21,7 +21,9 @@ public interface BookingMapper {
 	
 	public int deleteBookingByid(int id);
 	
-	public List<Booking> selectBookingByNP(
+	
+	//in: 2개 파라미터     output: List<Booking>
+	public List<Booking> selectBookingListByNP(
 			@Param("name") String name, 
 			@Param("phoneNumber") String phoneNumber);
 }

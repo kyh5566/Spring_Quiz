@@ -1,6 +1,5 @@
 package com.quiz.booking.bo;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,14 @@ public class BookingBO {
 	public int deleteBookingByid(int id) {
 		return bookingMapper.deleteBookingByid(id);
 	}
-	public Booking getBookingByNP(String name, String phoneNumber) {
+	public Booking getBookingByNP(String name, String phoneNumber) {	
+		List<Booking> bookingList = bookingMapper.selectBookingListByNP(name, phoneNumber);
+//		if(bookingList.isEmpty()) {
+//			return null;
+//		}
+//		return bookingList.get(bookingList.size() - 1);
 		
-		return bookingMapper.selectBookingByNP(name,phoneNumber);
+		// 사망연산자
+		return bookingList.isEmpty() ? null : bookingList.get(bookingList.size() - 1);
 	}
 }

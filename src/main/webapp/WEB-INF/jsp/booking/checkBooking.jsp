@@ -79,15 +79,15 @@
 					,url:"/booking/check-booking"
 					,data:{"name":name, "phoneNumber":phoneNumber}
 				,success:function(data) {
-					if (data.result == "성공") {
-						alert(
-						"이름 : " + ${info.name}
-						"날짜 : " + ${info.date}
-						"일수 : " + ${info.day}
-						"인원 : " + ${info.headcount}
-						"상태 : " + ${info.state}
-						);
+					if (data.code == 200) { // 200 예약내역 있는경우
+						alert("이름 :" + data.result.name 
+							+ "\n날짜 :" + data.result.date.subString(0,10) 
+							+ "\n일수 :" + data.result.day 
+							+ "\n인원 :" + data.result.headcount 
+							+ "\n상태 :" + data.result.state);
 						location.reload(true);
+					} else if (data.code == 500) {
+						alert(data.error_message)
 					}
 				}
 				,error:function(request, status, error) {

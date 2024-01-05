@@ -48,7 +48,7 @@
  			WHERE
  			`id` = #{id}
  	</delete>
- 	<select id="selectBookingByNP" parameterType="map">
+ 	<select id="selectBookingListByNP" parameterType="map" resultType="com.quiz.booking.domain.Booking">
  		SELECT
  			`name`
 			,`headcount`

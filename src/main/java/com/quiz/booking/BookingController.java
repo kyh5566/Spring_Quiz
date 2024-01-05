@@ -85,13 +85,19 @@ public class BookingController {
 	@PostMapping("/check-booking")
 	public Map<String, Object> getBooking(
 			@RequestParam("name") String name,
-			@RequestParam("phoneNumber") String phoneNumber
-			,Model model) {
-		Booking booking = bookingBO.getBookingByNP(name, phoneNumber); 
-		model.addAttribute("info",info);
+			@RequestParam("phoneNumber") String phoneNumber) {
 		
 		Map<String, Object> result = new HashMap<>();
-		result.put("result", "성공");
+		Booking booking = bookingBO.getBookingByNP(name, phoneNumber); 
+		if (booking == null) {
+			// {"code" : 500, "error_message" : "예약내역이 존재하지않습니다."}
+			result.put("code", 500);
+			result.put("error_message", "예약내역이 존재하지않습니다.");
+		} else {
+			result.put("code", 200);
+			result.put("result", booking);
+		}
 		return result;
+		// https://marobiana.tistory.com/168
 	}
 }
